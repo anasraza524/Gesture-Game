@@ -1,9 +1,9 @@
 import axios from "axios";
-
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 export const createUser = async (name, photo) => {
   try {
     console.log("name, photo",name, photo)
-    const response = await axios.post("http://localhost:5000/api/users", {
+    const response = await axios.post(`${BASE_URL}/api/users`, {
       name,
       photo,
     });
@@ -21,8 +21,7 @@ export const uploadVideo = async (userId, file) => {
     const formData = new FormData();
     formData.append("video", file);
 
-    const response = await axios.post(
-      `http://localhost:5000/api/upload/${userId}`,
+    const response = await axios.post(`${BASE_URL}/api/upload/${userId}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
