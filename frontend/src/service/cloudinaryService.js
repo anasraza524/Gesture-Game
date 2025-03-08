@@ -2,10 +2,12 @@ import axios from "axios";
 
 export const createUser = async (name, photo) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/user", {
+    console.log("name, photo",name, photo)
+    const response = await axios.post("http://localhost:5000/api/users", {
       name,
       photo,
     });
+    console.log("response",response)
     return response.data; // Returns the created user object
   } catch (error) {
     console.error("Error creating user:", error.response?.data || error.message);
@@ -15,6 +17,7 @@ export const createUser = async (name, photo) => {
 
 export const uploadVideo = async (userId, file) => {
   try {
+    console.log("userId, file",userId, file)
     const formData = new FormData();
     formData.append("video", file);
 
@@ -28,7 +31,7 @@ export const uploadVideo = async (userId, file) => {
 
     return response.data.videoURL;
   } catch (error) {
-    console.error("Video upload failed:", error.response?.data || error.message);
+    console.error("Video upload failed:", error.response?.data ,error.message);
     throw error;
   }
 };
